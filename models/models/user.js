@@ -9,29 +9,9 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.INTEGER
     },
 
-    firstname: {
-      type: Sequelize.STRING,
-      notEmpty: true
-    },
-
-    lastname: {
-      type: Sequelize.STRING,
-      notEmpty: true
-    },
-
     username: {
-      type: Sequelize.TEXT
-    },
-
-    about: {
-      type: Sequelize.TEXT
-    },
-
-    email: {
       type: Sequelize.STRING,
-      validate: {
-        isEmail: true
-      }
+      allowNull: false,
     },
 
     password: {
@@ -43,12 +23,24 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.DATE
     },
 
-    status: {
-      type: Sequelize.ENUM('active', 'inactive'),
-      defaultValue: 'active'
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('NOW()')
+    },
+
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.NULL
     }
+  }, {
+    indexes: [
+      {
+        unique: true,
+        fields: ['username']
+      }
+    ]
   });
-
   return User;
-
 };
