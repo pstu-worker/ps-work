@@ -1,0 +1,40 @@
+
+<div class="container">
+  <div class="row justify-content-md-center">
+
+    <div class="col-md-6">
+      <form class="form-horizontal border border-secondary shadow-lg" [formGroup]="registerForm" (ngSubmit)="SignIn()">
+        <span class="heading border-dark">Вход в систему</span>
+        <div class="form-group">
+          <label class="input">Логин</label>
+          <input
+            class="form-control"
+            formControlName="username"
+            placeholder="test"
+            (keypress)="ResetError()"
+            autofocus
+          >
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="form-group help">
+          <label class="input">Пароль</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Введите пароль..."
+            (keypress)="ResetError()"
+          >
+          <i class="fa fa-lock"></i>
+          <div *ngIf="submitted" class="invalid-feedback">
+            <div *ngIf="result.type == 'E'">Username or password are uncorrected</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-default">ВХОД</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

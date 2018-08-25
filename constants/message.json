@@ -1,0 +1,30 @@
+{
+  "SGN_ER_WRG": {
+                  "type": "E",
+                  "message": "Something went wrong with your Sign_in"
+                },
+  "US_NT_EXST": {
+                  "type": "E",
+                  "message": "Username does not exist"
+                },
+  "INCRT_PSWD": {
+                  "type": "E",
+                  "message": "Incorrect password"
+                },
+  "US_ALR_TKN": {
+                  "type": "E",
+                  "message": "Username already taken"
+                },
+  "US_NOT_TKN": {
+                  "type": "E",
+                  "message": "Username is not taken"
+                },
+  "SCS_SGN_P":  {
+                  "type": "I",
+                  "message": "Successfully signed up User"
+                },
+  "SCS_SGN_N": {
+                 "type": "I",
+                 "message": "Successfully signed in User"
+               }
+}
