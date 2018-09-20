@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserModule } from '../../models/User';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,11 +13,13 @@ import { UserModule } from '../../models/User';
 
 export class SignInComponent implements OnInit {
   registerForm: FormGroup;
-  submitted = false;
+  result: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -23,21 +27,36 @@ export class SignInComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.result = {};
+    const user = UserModule.User.getLocal();
+    console.warn(user);
+    if (!isNullOrUndefined(user)) {
+      console.error(user);
+      UserModule.User.saveInfo({ 'type': 'I' }, { 'username': user });
+      this.router.navigate([ '/main'], { relativeTo: this.route } );
+    }
   }
 
   private ResetError() {
-    this.submitted = false;
+    this.result = {};
   }
 
   private SignIn() {
-    this.submitted = true;
     this.GetData();
   }
 
   private GetData() {
     this.authService.SignIn(this.registerForm.value)
       .subscribe(res => {
-        UserModule.User.setUser(res);
+        UserModule.User.saveInfo(res, this.registerForm.value['username']);
+        this.SaveResult();
     });
+  }
+
+  private SaveResult() {
+    this.result = UserModule.User.getMessage();
+    if ( !isNullOrUndefined(UserModule.User.getUser()) ) {
+      this.router.navigate([ '/main'], { relativeTo: this.route } );
+    }
   }
 }

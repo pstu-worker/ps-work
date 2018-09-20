@@ -9,11 +9,13 @@ import { AppRoutes } from '../../config/routerConfig';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthService } from '../services/auth/auth.service';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignInComponent
+    SignInComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

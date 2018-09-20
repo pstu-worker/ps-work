@@ -13,11 +13,6 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(bodyParser.json());
 
-// function redirectRouterLessonUnmatched(req,res) {
-//   res.sendFile("index.html", { root: './index.html' });
-// }
-// app.use(redirectRouterLessonUnmatched);
-
 //Sync Database
 db.sequelize
   .authenticate()
